@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>New York Times Search</title>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+   <div class="container">
+     <!--jumbotron-->
+     <div class="jumbotron jumbotron-fluid">
+       <div class="container">
+         <h1 class="display-4">New York Times Search</h1>
+         <p class="lead"></p>
+       </div>
+       <div id="articles">
+           
+       </div>
+     </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+var searchItem = "clinton"
+var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + searchItem + "&apikey=b75930e06a2146e6ab50506b671c5ef7";
+// var searchItem = $('#searchTerm').val();
+
+$.ajax ({
+    url: queryURL,
+    method: "GET",
+}).then(function(response) {
+    console.log(response)
+    console.log(response.response.docs)
+    for (i = 0; i < response.response.docs.length; i++){
+    var articleDiv = $('div')
+    articleDiv.html(JSON.stringify(response.response.docs[i]))
+    $('#articles').append(articleDiv);
+    console.log(response.response.docs[i]);
+    }
+})
+
+</script>
